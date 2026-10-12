@@ -1,33 +1,25 @@
-<!-- dashboard/dashboard.component.html -->
-<div class="dashboard-container">
+<div class="dashboard">
+  <h1>Dashboard</h1>
+  <p>Welcome back! Here's an overview of your users.</p>
 
-  <div class="dashboard-header">
-    <h2>Dashboard</h2>
-    <p>Welcome back! Here are all the available games:</p>
-  </div>
-
-  <div class="card">
-    <h3>Users</h3>
-    <table>
-      <thead>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.id) {
         <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td><span class="badge">{{ user.role }}</span></td>
         </tr>
-      </thead>
-      <tbody>
-        @for (user of users; track user.id) {
-          <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td><span class="badge">{{ user.role }}</span></td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-
+      }
+    </tbody>
+  </table>
 </div>

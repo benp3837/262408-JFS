@@ -64,3 +64,14 @@ button[type="submit"]:hover {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+:host {
+  display: block;
+  background: white;
+  border: 1px solid #a8bce8;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(30, 80, 180, 0.1);
+  max-width: 420px;
+  margin: 100px auto;
+}
