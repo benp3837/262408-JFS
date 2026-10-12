@@ -1,0 +1,72 @@
+/* dashboard/dashboard.component.css */
+.dashboard-container {
+  max-width: 75%;
+  margin: 60px auto;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header h2 {
+  font-size: 1.8rem;
+  color: #1a3a7a;
+}
+
+.dashboard-header p {
+  color: #5c7cbb;
+  margin-top: 0.25rem;
+}
+
+.card {
+  background: white;
+  border: 1px solid #a8bce8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(30, 80, 180, 0.1);
+}
+
+.card h3 {
+  margin-bottom: 1rem;
+  color: #1a3a7a;
+  font-size: 1.1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #e8f0fe;
+}
+
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: #2a4a8a;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #e8f0fe;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+tr:hover td {
+  background: #f4f7fe;
+}
+
+.badge {
+  background: #e8f0fe;
+  color: #2a5edd;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
