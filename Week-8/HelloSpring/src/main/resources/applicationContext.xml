@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The applicationContext.xml holds the configurations for how we register, create, and inject Spring Beans -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- We need the <beans> tag ^ and its configs for Spring to use this XML file -->
+
+    <!-- The <bean> tag is used to register and wire Spring Beans (it's how we turn classes into beans) -->
+
+    <!-- The "name" attribute is up to us. The "class" attribute is the path to the class -->
+
+    <!-- ___ Bean -->
+    <bean name="____" class="com.revature.models.____">
+        <!-- We can set default properties with the <property> tag -->
+        <property name="____" value="DEFAULT"></property>
+    </bean>
+
+    <!-- ____ Bean -->
+    <bean name="___" class="com.revature.models.____">
+
+        <!-- Now we're going to WIRE the beans together -->
+        <!-- This is how we define dependencies to be injected -->
+        <property name="___" ref="___"></property>
+        <!-- name is up to us, and ref is the BEAN NAME we're trying to wire -->
+    </bean>
+
+
+</beans>
