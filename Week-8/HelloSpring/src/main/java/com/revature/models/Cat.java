@@ -1,8 +1,10 @@
 package com.revature.models;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component //This makes a class a bean! No need to do it in XML
+//Then, to WIRE the beans together, we can put @Autowired over the field, setter, or a constructor
 public class Cat {
 
     private int catId;
@@ -11,9 +13,15 @@ public class Cat {
 
     //Owner is a DEPENDENCY of Cat
     //With Spring we can "wire beans together" to accomplish DEPENDENCY INJECTION
+    //@Autowired <- FIELD INJECTION - BAD (breaking encapsulation, makes our beans harder to test)
     private Owner owner;
 
     //boilerplate-----
+
+    @Autowired //CONSTRUCTOR INJECTION - BEST PRACTICE for automatic bean wiring
+    public Cat(Owner owner) {
+        this.owner = owner;
+    }
 
     public Cat() {
     }
@@ -53,6 +61,7 @@ public class Cat {
         return owner;
     }
 
+    //@Autowired //SETTER INJECTION - Fine practice, used when we have optional dependencies
     public void setOwner(Owner owner) {
         this.owner = owner;
     }

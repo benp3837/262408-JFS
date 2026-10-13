@@ -18,7 +18,7 @@ public class HelloSpringApplication {
 		//ApplicationContext is the "Spring Container" that we'll use
 			//A Spring Container manages and injects beans
 		ApplicationContext ac =
-				new ClassPathXmlApplicationContext("applicationContext.xml");
+			new ClassPathXmlApplicationContext("annotationDrivenApplicationContext.xml");
 
 		//First, lets just view all the beans in the Spring Container
 		String[] beanNames = ac.getBeanDefinitionNames();
@@ -31,7 +31,7 @@ public class HelloSpringApplication {
 		//Now, let's instantiate some Owners and Cats to see DEPENDENCY INJECTION at work
 
 		Owner owner = ac.getBean(Owner.class);
-		System.out.println(owner); //nothing crazy, but we do see the default value
+		System.out.println(owner); //nothing crazy
 
 		Cat cat = ac.getBean(Cat.class);
 		System.out.println(cat);
