@@ -39,7 +39,7 @@ public class HelloSpringApplication {
 		//FASCINATING^ We see that an Owner was instantiated for us
 		//Thank you: Dependency Injection, Spring Beans, & Spring Container
 
-		
+
 
 	}
 

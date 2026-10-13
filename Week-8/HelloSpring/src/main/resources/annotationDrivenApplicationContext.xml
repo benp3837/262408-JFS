@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The applicationContext.xml holds the configurations for how we register, create, and inject Spring Beans -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- We need the <beans> tag ^ and its configs for Spring to use this XML file -->
+
+    <!--This is all we need in our Application Context config when using annotation-based bean declaration-->
+    <context:component-scan base-package="com.revature"></context:component-scan>
+    <!--This tells Spring to search the "com.revature" package for annotations-->
+
+</beans>
