@@ -10,10 +10,7 @@ package com.revature.controllers;
 import com.revature.models.Boat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,21 +48,36 @@ public class BoatController {
     @GetMapping("/byId/{id}") // GET requests to /boat/byId/{id} will trigger this method
     public ResponseEntity<Boat> getBoatById(@PathVariable int id){
 
-            //Hardcoded list of boats - imagine we got it from a DB
-            List<Boat> boats = List.of(
-                    new Boat(1, "Sailboat"),
-                    new Boat(2, "Yacht"),
-                    new Boat(3, "Canoe"));
+        //User input validation (SHOULD BE in the service layer...)
+        if(id < 1){
+            throw new IllegalArgumentException("Invalid ID! Must be greater than 1");
+        }
 
-            //Find the boat with the matching id
-            for(Boat boat : boats){
-                if(boat.boatId == id){
-                    return ResponseEntity.ok(boat); //200 OK response with the boat as JSON.
-                }
+        //Hardcoded list of boats - imagine we got it from a DB
+        List<Boat> boats = List.of(
+                new Boat(1, "Sailboat"),
+                new Boat(2, "Yacht"),
+                new Boat(3, "Canoe"));
+
+        //Find the boat with the matching id
+        for(Boat boat : boats){
+            if(boat.boatId == id){
+                return ResponseEntity.ok(boat); //200 OK response with the boat as JSON.
             }
+        }
 
-            //If we get here, no boat was found with that id
-            return ResponseEntity.notFound().build(); //404 Not Found response
+        //If we get here, no boat was found with that id
+        return ResponseEntity.notFound().build(); //404 Not Found response
+    }
+
+
+
+    //Global Exception Handling -------------------
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArg(Exception e){
+        //Send back a 400 "Bad Request" with the Exception message
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
 }
