@@ -1,5 +1,8 @@
 package com.revature.models;
 
+import org.springframework.stereotype.Component;
+
+@Component //again, this makes a Class a Bean
 public class Owner {
 
     private int ownerId;

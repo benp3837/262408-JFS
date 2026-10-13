@@ -1,5 +1,8 @@
 package com.revature.models;
 
+import org.springframework.stereotype.Component;
+
+@Component //This makes a class a bean! No need to do it in XML
 public class Cat {
 
     private int catId;
