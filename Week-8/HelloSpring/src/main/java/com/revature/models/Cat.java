@@ -1,10 +1,12 @@
 package com.revature.models;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component //This makes a class a bean! No need to do it in XML
 //Then, to WIRE the beans together, we can put @Autowired over the field, setter, or a constructor
+@Scope("prototype") //Taking scope off of the "singleton" default, to allow different instance per bean
 public class Cat {
 
     private int catId;
