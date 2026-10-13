@@ -15,18 +15,18 @@
 
     <!-- The "name" attribute is up to us. The "class" attribute is the path to the class -->
 
-    <!-- ___ Bean -->
-    <bean name="____" class="com.revature.models.____">
+    <!-- Owner Bean -->
+    <bean name="owner" class="com.revature.models.Owner">
         <!-- We can set default properties with the <property> tag -->
-        <property name="____" value="DEFAULT"></property>
+        <property name="ownerName" value="NONAME"></property>
     </bean>
 
-    <!-- ____ Bean -->
-    <bean name="___" class="com.revature.models.____">
+    <!-- Cat Bean -->
+    <bean name="cat" class="com.revature.models.Cat">
 
         <!-- Now we're going to WIRE the beans together -->
         <!-- This is how we define dependencies to be injected -->
-        <property name="___" ref="___"></property>
+        <property name="owner" ref="owner"></property>
         <!-- name is up to us, and ref is the BEAN NAME we're trying to wire -->
     </bean>
 
