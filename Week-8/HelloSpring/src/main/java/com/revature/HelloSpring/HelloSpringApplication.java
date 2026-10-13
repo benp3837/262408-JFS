@@ -13,7 +13,6 @@ public class HelloSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HelloSpringApplication.class, args);
 
-
 		//Before we can see the Beans in action, we need to create our ApplicationContext object
 		//ApplicationContext is the "Spring Container" that we'll use
 			//A Spring Container manages and injects beans
