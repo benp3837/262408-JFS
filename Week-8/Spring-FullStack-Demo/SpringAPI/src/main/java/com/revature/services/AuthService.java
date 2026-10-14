@@ -26,7 +26,19 @@ public class AuthService {
     //Insert User - calls the UserDAO's save() method
     public User insertUser(User newUser){
 
-        //TODO: input validation, etc
+        //Some basic input validation (make sure the user fields are valid)
+
+        //Check if a valid username was passed in
+        if(newUser.getUsername().isBlank()){
+            throw new IllegalArgumentException("Username must be present!");
+        }
+
+        //Check if the role is valid ("user" or "admin")
+        if(!newUser.getRole().equals("user")
+                && !newUser.getRole().equals("admin")){
+            throw new IllegalArgumentException("Invalid Role!");
+        }
+
 
         //save() is used for inserts AND updates
             //if the ID doesn't exist, it inserts a new record
@@ -34,6 +46,7 @@ public class AuthService {
         return userDAO.save(newUser);
 
         //TODO: maybe strip or obscure the password before sending it back
+            //NOTE: we did this in the UserService in getAllUsers()
 
     }
 
