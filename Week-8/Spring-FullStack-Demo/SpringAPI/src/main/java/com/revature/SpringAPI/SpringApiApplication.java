@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan("com.revature") //our bean annotations won't work without this!
 @EntityScan("com.revature.models") //Spring Data will look in our models package for DB annotations
-@EnableJpaRepositories("com.revature.DAOs") //Lets our DAO class (which extends JPA) become a bean
+@EnableJpaRepositories("com.revature.repositories") //Lets our DAO class (which extends JPA) become a bean
 public class SpringApiApplication {
 
 	public static void main(String[] args) {
