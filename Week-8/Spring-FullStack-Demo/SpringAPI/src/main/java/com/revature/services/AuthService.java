@@ -17,10 +17,13 @@ public class AuthService {
 
     //The Service needs the DAO. They're both beans, so let's CONSTRUCTOR INJECT
     private final UserDAO userDAO;
+    //We also need the UserService to find users by username
+    private final UserService userService;
 
     @Autowired
-    public AuthService(UserDAO userDAO) {
+    public AuthService(UserDAO userDAO, UserService userService) {
         this.userDAO = userDAO;
+        this.userService = userService;
     }
 
     //Insert User - calls the UserDAO's save() method
@@ -42,7 +45,9 @@ public class AuthService {
 
         //Check if username already exists
         //Using our custom UserDAO method findByUsername()
-
+        if(userService.findByUsername(newUser.getUsername()).isPresent()){
+            throw new IllegalArgumentException("Username taken!");
+        }
 
 
         //save() is used for inserts AND updates

@@ -5,6 +5,8 @@ import com.revature.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /* We extended JpaRepository, which takes 2 generics
 
 -The Java Entity that we intend to perform CRUD operations on (User Class)
@@ -19,7 +21,7 @@ public interface UserDAO extends JpaRepository<User, Integer> {
 
     //This method will find a User by their username
     //This is called a PROPERTY EXPRESSION
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     //TODO: To check for valid login, we'll need a Property Expression...
 
