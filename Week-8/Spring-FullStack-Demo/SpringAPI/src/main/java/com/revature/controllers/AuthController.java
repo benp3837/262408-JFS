@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     //Inject the UserService with Constructor Injection
-    //TODO: more on this later, just wanted to show this pattern early
     private final AuthService authService;
 
     @Autowired
@@ -47,8 +46,8 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User newUser){
 
-        //TODO: Send the newUser to the Service to get processed and persisted
-        User createdUser = newUser; //(That call to the Service would happen here)
+        //Send the newUser to the Service to get processed and persisted
+        User createdUser = authService.insertUser(newUser);
 
         return ResponseEntity.status(201).body(createdUser);
 
