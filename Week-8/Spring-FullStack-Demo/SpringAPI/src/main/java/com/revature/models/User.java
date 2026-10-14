@@ -18,6 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //This is what makes the PK autoincrement
     private int userId;
 
+    //@Column - this is not needed to make a field a column!!!
+        //BUT, we need it to apply constraints
+
+    @Column(unique = true, nullable = false)
     private String username;
 
     private String password;

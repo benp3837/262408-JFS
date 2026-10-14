@@ -1,13 +1,29 @@
 package com.revature.models;
 
-//TODO: No Spring Data annotations here yet. We'll do it together for practice
+//Again, no @Component, it'll be a DB @Entity
 
+import jakarta.persistence.*;
+
+@Entity // Tells Spring to make this Class a DB table
+@Table(name = "games") //Set the table name to "games"
 public class Game {
 
+    @Id //Tell Spring that this is the Primary Key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Make the PK auto-increment
     private int gameId;
+
+    @Column(nullable = false) //Games must have a title
     private String gameTitle;
 
-    //TODO: add a field for user (the user the game belongs to)
+    //Add a field for user (the user the game belongs to)
+    //THIS IS THE FK! Games will have a many-to-one relationship with Users.
+
+    /*
+
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
+    private User user;
 
 
     //boilerplate ---------------------------
