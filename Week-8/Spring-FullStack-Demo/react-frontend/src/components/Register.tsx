@@ -1,16 +1,21 @@
+// register/Register.tsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
 
 function Register() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const role = 'user';
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await register(username, password);
-      alert('Registration successful! You can now log in.');
+      await register(username, password, role);
+      alert('Registration successful!');
+      navigate('/login');
     } catch {
       alert('Registration failed. Please try again.');
     }

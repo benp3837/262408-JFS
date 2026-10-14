@@ -1,22 +1,22 @@
-<div class="dashboard">
-  <h1>Dashboard</h1>
-  <p>Welcome back! Here's an overview of your users.</p>
+<div class="dashboard-header">
+  <h2>Dashboard</h2>
+  <p>Welcome back! Here are all the users (this is probs an admin view)</p>
+</div>
 
+<div class="card">
   <table>
     <thead>
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
+        <th>Username</th>
         <th>Role</th>
       </tr>
     </thead>
     <tbody>
-      @for (user of users; track user.id) {
+      @for (user of users; track user.userId) {
         <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
+          <td>{{ user.userId }}</td>
+          <td>{{ user.username }}</td>
           <td><span class="badge">{{ user.role }}</span></td>
         </tr>
       }

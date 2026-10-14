@@ -1,6 +1,13 @@
-// dashboard/dashboard.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user.service';
+
+interface User {
+  userId: number;
+  username: string;
+  password: string;
+  role: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -9,15 +16,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  users: User[] = [];
 
-  //TODO: subscribe to the call to get all games in the service
+  constructor(private userService: UserService) {}
 
-  //just some AI dummy data for now
-
-  users = [
-    { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin' },
-    { id: 2, name: 'Bob Smith',     email: 'bob@example.com',   role: 'Editor' },
-    { id: 3, name: 'Carol White',   email: 'carol@example.com', role: 'Viewer' }
-  ];
+  ngOnInit() {
+    this.userService.getAllUsers().subscribe({
+      next: (data:any) => this.users = data,
+      error: () => alert('Failed to load users.')
+    });
+  }
 }

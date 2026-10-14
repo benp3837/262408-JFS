@@ -10,11 +10,11 @@ export const login = async (username: string, password: string): Promise<any> =>
   return res.json();
 };
 
-export const register = async (username: string, password: string): Promise<any> => {
+export const register = async (username: string, password: string, role: string): Promise<any> => {
   const res = await fetch(`${BASE_URL}/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password, role })
   });
   if (!res.ok) throw new Error('Registration failed');
   return res.json();
