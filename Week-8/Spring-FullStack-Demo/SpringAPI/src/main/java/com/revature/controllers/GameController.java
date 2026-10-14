@@ -18,7 +18,6 @@ import java.util.List;
 public class GameController {
 
     //Inject the GameService with Constructor Injection
-    //TODO: more on this later, just wanted to show this pattern early
     private final GameService gameService;
 
     @Autowired

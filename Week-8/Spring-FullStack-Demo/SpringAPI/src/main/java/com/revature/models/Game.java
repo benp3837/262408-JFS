@@ -18,9 +18,16 @@ public class Game {
     //Add a field for user (the user the game belongs to)
     //THIS IS THE FK! Games will have a many-to-one relationship with Users.
 
-    /*
+    /* Every Game has a User it belongs to
 
-     */
+    fetch - defines whether the dependency gets loaded on app start or when needed
+        EAGER - load the dependency on app start
+        LAZY - load the dependency when needed (in my experience can cause problems)
+
+    @JoinColumn - define the column in the PK table that this FK references
+        name - the name of the column in the FK table (games)
+        referencedColumnName - the name of the column in the PK table
+            it should also be the name of the field in the PK class (just for ease) */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private User user;
