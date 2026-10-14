@@ -27,6 +27,7 @@ public class AuthService {
     public User insertUser(User newUser){
 
         //Some basic input validation (make sure the user fields are valid)
+        //TODO: abstract this validation logic out to a dedicated method
 
         //Check if a valid username was passed in
         if(newUser.getUsername().isBlank()){
@@ -38,6 +39,10 @@ public class AuthService {
                 && !newUser.getRole().equals("admin")){
             throw new IllegalArgumentException("Invalid Role!");
         }
+
+        //Check if username already exists
+        //Using our custom UserDAO method findByUsername()
+
 
 
         //save() is used for inserts AND updates

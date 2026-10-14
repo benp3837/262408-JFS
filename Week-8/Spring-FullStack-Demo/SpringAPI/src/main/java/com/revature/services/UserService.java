@@ -37,5 +37,11 @@ public class UserService {
 
     }
 
+    public User findByUsername(String username){
+
+        return userDAO.findByUsername(username);
+
+    }
+
 
 }

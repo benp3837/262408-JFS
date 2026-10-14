@@ -17,5 +17,19 @@ This is thanks to a very rich inheritance hierarchy above JpaRepository*/
 public interface UserDAO extends JpaRepository<User, Integer> {
 
 
+    //This method will find a User by their username
+    //This is called a PROPERTY EXPRESSION
+    User findByUsername(String username);
+
+    //TODO: To check for valid login, we'll need a Property Expression...
+
+    /* HOW TO MAKE PROPERTY EXPRESSIONS
+
+     The methods MUST be named like findByX, existsByX, findByXAndY
+     "X" and "Y" MUST be exact names of fields in your entity
+
+     Spring Data will do A LOT for us, if we follow its rules
+     PropExs are very flexible, feel free to look into them! */
+
 
 }
