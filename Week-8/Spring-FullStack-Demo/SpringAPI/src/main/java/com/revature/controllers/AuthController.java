@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.jwt.JwtUtil;
 import com.revature.models.LoginDTO;
 import com.revature.models.User;
 import com.revature.services.AuthService;
@@ -18,11 +19,13 @@ public class AuthController {
 
     //Inject the UserService with Constructor Injection
     private final AuthService authService;
-    //TODO: hi ben you wanna constructor inject the jwtutil
+    //Inject the JwtUtil so we can make JWTs after login
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, JwtUtil jwtUtil) {
         this.authService = authService;
+        this.jwtUtil = jwtUtil;
     }
 
     //Log in User (POST Requests to /auth will get routed here)
