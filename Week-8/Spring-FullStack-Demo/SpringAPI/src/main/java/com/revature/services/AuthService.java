@@ -26,6 +26,8 @@ public class AuthService {
         this.userService = userService;
     }
 
+    //TODO: hi ben you wanted to put login here
+
     //Insert User - calls the UserDAO's save() method
     public User insertUser(User newUser){
 

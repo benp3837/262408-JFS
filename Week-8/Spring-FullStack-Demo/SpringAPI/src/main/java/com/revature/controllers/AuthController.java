@@ -18,6 +18,7 @@ public class AuthController {
 
     //Inject the UserService with Constructor Injection
     private final AuthService authService;
+    //TODO: hi ben you wanna constructor inject the jwtutil
 
     @Autowired
     public AuthController(AuthService authService) {
@@ -28,18 +29,10 @@ public class AuthController {
     //TODO: JWTs will get created upon successful login
     @PostMapping
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200"}, allowedHeaders = "*")
-    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 
-        System.out.println(loginDTO);
-
-        //(hardcoded) Upon successful login, return a 200 OK and a success message
-        if(loginDTO.getUsername().equals("user") && loginDTO.getPassword().equals("pass")){
-            return ResponseEntity.ok().body(loginDTO);
-        } else {
-            //otherwise... send a 401 Unauthorized with a failure message
-            return ResponseEntity.status(401).body("Invalid credentials");
-        }
-
+        //TODO: ben - start with the non-jwt login
+        return null;
     }
 
     //Register User (POST Requests to /auth/register will get routed here)
