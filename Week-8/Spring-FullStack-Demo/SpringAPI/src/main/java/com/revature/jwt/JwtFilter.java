@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        //JWTs are categorized as something called "bearer tokens"
+        // JWTs are categorized as something called "bearer tokens"
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
 
@@ -39,12 +39,12 @@ public class JwtFilter extends OncePerRequestFilter {
                 String username = jwtUtil.extractUsername(token);
                 String role = jwtUtil.extractRole(token);
 
-                // Spring Security expects roles prefixed with ROLE_
+                // Use the role directly as it already includes the ROLE_ prefix
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(
                                 username,
                                 null,
-                                List.of(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))
+                                List.of(new SimpleGrantedAuthority(role))
                         );
 
                 SecurityContextHolder.getContext().setAuthentication(auth);
