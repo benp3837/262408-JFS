@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { login, setToken } from '../services/authService';
+import { login, setToken, isAdmin } from '../services/authService';
 
 function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    const token = await login(username, password);
-    setToken(token);
-    navigate('/dashboard');
-  } catch {
-    alert('Login failed. Please check your credentials.');
-  }
-};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const token = await login(username, password);
+      setToken(token);
+      if (isAdmin()) {
+        navigate('/dashboard');
+      } else {
+        navigate('/user-dashboard');
+      }
+    } catch {
+      alert('Login failed. Please check your credentials.');
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>

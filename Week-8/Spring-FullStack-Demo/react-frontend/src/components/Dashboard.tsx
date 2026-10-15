@@ -4,7 +4,6 @@ import { getAllUsers } from '../services/userService';
 interface User {
   userId: number;
   username: string;
-  password: string;
   role: string;
 }
 
@@ -21,7 +20,7 @@ function Dashboard() {
     <div style={{ maxWidth: '75%', margin: '60px auto', fontFamily: 'Segoe UI, sans-serif' }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '1.8rem', color: '#7a1a1a' }}>Dashboard</h2>
-        <p style={{ color: '#b05c5c', marginTop: '0.25rem' }}>Welcome back! Here's an overview of your users (This is probably an admin view)</p>
+        <p style={{ color: '#b05c5c', marginTop: '0.25rem' }}>Welcome back! Here's an overview of your users.</p>
       </div>
 
       <div style={{ background: 'white', border: '1px solid #e8a8a8', borderRadius: '12px', padding: '1.5rem', boxShadow: '0 4px 16px rgba(180,30,30,0.1)' }}>

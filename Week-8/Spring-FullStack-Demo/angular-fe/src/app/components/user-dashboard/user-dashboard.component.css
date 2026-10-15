@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  max-width: 75%;
+  margin: 60px auto;
+}
+
+.dashboard-header h2 {
+  font-size: 1.8rem;
+  color: #1a3a7a;
+}
+
+.dashboard-header p {
+  color: #5c7cbb;
+  margin-top: 0.25rem;
+}
