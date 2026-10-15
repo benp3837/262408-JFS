@@ -34,8 +34,13 @@ public class AuthController {
     @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200"}, allowedHeaders = "*")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 
-        //TODO: ben - start with the non-jwt login
-        return null;
+        if(loginDTO.getUsername().equals("user")){
+            String token = jwtUtil.generateToken(loginDTO.getUsername(), "user", 1);
+
+            return ResponseEntity.ok().body(token);
+        } else {
+            return null;
+        }
     }
 
     //Register User (POST Requests to /auth/register will get routed here)
