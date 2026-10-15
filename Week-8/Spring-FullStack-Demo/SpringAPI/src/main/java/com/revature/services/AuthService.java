@@ -26,7 +26,16 @@ public class AuthService {
         this.userService = userService;
     }
 
-    //TODO: hi ben you wanted to put login here
+    //Login - calls the UserDAO's findByUsernameAndPassword()
+    public User login(LoginDTO loginDTO){
+
+        //TODO: yes we should probably do some input validations
+
+        return userDAO.findByUsernameAndPassword(
+                loginDTO.getUsername(), loginDTO.getPassword()
+        ).orElseThrow(() -> new IllegalArgumentException("Login Credentials Invalid"));
+
+    }
 
     //Insert User - calls the UserDAO's save() method
     public User insertUser(User newUser){
