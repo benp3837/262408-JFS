@@ -29,18 +29,25 @@ public class AuthController {
     }
 
     //Log in User (POST Requests to /auth will get routed here)
-    //TODO: JWTs will get created upon successful login
+    //JWTs will get created/returned upon successful login
     @PostMapping
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200"}, allowedHeaders = "*")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 
-        if(loginDTO.getUsername().equals("user")){
-            String token = jwtUtil.generateToken(loginDTO.getUsername(), "user", 1);
+        User loggedInUser = authService.login(loginDTO);
 
-            return ResponseEntity.ok().body(token);
-        } else {
-            return null;
-        }
+        //If the User was null^ login failed and Exception was thrown from the service
+
+        //Now we can make and return the JWT!
+        String token = jwtUtil.generateToken(
+                loggedInUser.getUsername(),
+                loggedInUser.getRole(),
+                loggedInUser.getUserId()
+        );
+
+        System.out.println("Token: " + token);
+
+        return ResponseEntity.ok(token);
+
     }
 
     //Register User (POST Requests to /auth/register will get routed here)
