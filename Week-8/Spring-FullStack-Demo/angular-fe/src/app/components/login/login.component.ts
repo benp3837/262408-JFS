@@ -19,12 +19,12 @@ export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) {}
 
   onLogin() {
-
-    console.log(this.username + " " + this.password)
-
     this.authService.login(this.username, this.password).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
-      error: () => alert('Login failed. Please check your credentials.')
+      next: (token) => {
+        this.authService.setToken(token);
+        this.router.navigate(['/dashboard']);
+      },
+      error: () => alert('Login failed.')
     });
   }
 }
