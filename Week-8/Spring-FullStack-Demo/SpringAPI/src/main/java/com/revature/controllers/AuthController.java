@@ -33,6 +33,8 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 
+        System.out.println(loginDTO); //just to see
+
         User loggedInUser = authService.login(loginDTO);
 
         //If the User was null^ login failed and Exception was thrown from the service

@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.post(`${this.baseUrl}`, { "username":username, "password":password });
+    return this.http.post(`${this.baseUrl}`, { "username":username, "password":password }, {responseType: 'text'});
   }
 
   register(username: string, password: string, role: string) {
