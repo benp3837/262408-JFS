@@ -13,20 +13,24 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
+    // Every JWT will have a secret key that helps it be unique
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final long EXPIRATION = 1000 * 60 * 60 * 8; // 8 hours
 
     // Generates a signed JWT containing the username, role, and userId as claims
     public String generateToken(String username, String role, int userId) {
         return Jwts.builder()
-                .setSubject(username)
-                .claim("role", role)
+                .setSubject(username) //who the user is
+                .claim("role", role) //claims are just other pieces of info
                 .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                .signWith(key)
+                .signWith(key) //the "signature", which identifies the JWT itself
                 .compact();
     }
+
+    //Extraction methods -----
+        //These help us "extract" info from the JWTs
 
     // Extracts the username (subject) from a JWT
     public String extractUsername(String token) {
