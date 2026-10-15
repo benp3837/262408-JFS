@@ -1,4 +1,4 @@
-package com.revature.jwts;
+package com.revature.jwt;
 
 public class JwtFilter {
 }
