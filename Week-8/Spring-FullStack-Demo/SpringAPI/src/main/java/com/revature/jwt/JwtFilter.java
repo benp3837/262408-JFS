@@ -24,7 +24,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
     // Runs once per request — checks for a JWT in the Authorization header
     // If valid, sets the authenticated user in Spring Security's context
-    // so that @PreAuthorize and other security checks work downstream
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -32,6 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
+        //JWTs are categorized as something called "bearer tokens"
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
 
