@@ -15,7 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 //This class configures Spring Security for the application
-
+//Stuff like who can access what methods, and what kinds of requests are allowed
 
 @Configuration //Class-based bean configuration! SprSec encourages this
 public class SecurityConfig {
@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()  // login and register are public
-                        .anyRequest().authenticated()             // everything else requires a valid JWT
+                        .anyRequest().authenticated()   // everything else requires a valid JWT
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
