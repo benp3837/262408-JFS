@@ -4,6 +4,7 @@ package com.revature.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -39,6 +40,10 @@ public class LoggingAspect {
     }
 
 
-
+    //Logging Exception throws with @AfterThrowing
+    @AfterThrowing(pointcut="execution(* com.revature.services.*.*(..))", throwing="exc")
+    public void logServiceExceptions(JoinPoint jp, Throwable exc){
+        logger.error(jp.getSignature().getName() + " threw: " + exc);
+    }
 
 }
