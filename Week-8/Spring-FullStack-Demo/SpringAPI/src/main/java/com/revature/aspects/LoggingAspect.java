@@ -30,13 +30,12 @@ public class LoggingAspect {
 
     /*This Advice will run AFTER successfully returning a value
 
-     //TODO: more notes
-
-     "After the execution of any method in any class that has any args inside the service layer, generate a log"
+     //A pointcut is an exact location where advices WILL BE executed
+     "After the execution of any method in any service class that has any args inside the service layer, generate a log"
      */
     @AfterReturning(pointcut="execution(* com.revature.services.*.*(..))", returning="result")
     public void logSuccessfulServiceMethods(JoinPoint jp, Object result){
-        //TODO: write the log
+        logger.info(jp.getSignature().getName() + " successfully returned: " + result);
     }
 
 
