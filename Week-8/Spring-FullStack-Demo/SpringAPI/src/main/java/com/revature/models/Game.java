@@ -38,9 +38,10 @@ public class Game {
     public Game() {
     }
 
-    public Game(int gameId, String gameTitle) {
+    public Game(int gameId, String gameTitle, User user) {
         this.gameId = gameId;
         this.gameTitle = gameTitle;
+        this.user = user;
     }
 
     public int getGameId() {
@@ -57,6 +58,14 @@ public class Game {
 
     public void setGameTitle(String gameTitle) {
         this.gameTitle = gameTitle;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

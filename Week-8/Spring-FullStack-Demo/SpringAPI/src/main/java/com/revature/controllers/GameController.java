@@ -33,16 +33,24 @@ public class GameController {
         //TODO: Call to GameService would be here, hardcoding for now
         List<Game> games = new ArrayList<Game>();
 
-        games.add(new Game(1, "Hollow Knight"));
-        games.add(new Game(2, "Halo 3"));
-        games.add(new Game(3, "Duck Game"));
+        games.add(new Game(1, "Hollow Knight", null));
+        games.add(new Game(2, "Halo 3", null));
+        games.add(new Game(3, "Duck Game", null));
 
         //ok() is a shorthand way to say status(200) btw
         return ResponseEntity.ok().body(games);
 
     }
 
+    //Insert a game into the DB - POST request to /games
+    @PostMapping
+    public ResponseEntity<Game> insertGame(@RequestBody Game game,
+                                   @RequestHeader("Authorization") String token){
 
-    //TODO: other stuff related to games
+        Game createdGame = gameService.insertGame(game, token);
+
+        return ResponseEntity.status(201).body(createdGame);
+
+    }
 
 }
