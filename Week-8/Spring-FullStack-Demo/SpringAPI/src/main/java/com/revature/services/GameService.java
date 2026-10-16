@@ -29,9 +29,12 @@ public class GameService {
     //Insert game (calls findById of userDAO to get the User object)
     public Game insertGame(Game game, String token){
 
+        //The Auth header is "Bearer <token>", but we just need <token>
+        String strippedToken = token.substring(7).trim(); // Remove "Bearer " and trim spaces
+
         //Get the user by id using id extracted from the JWT
         //TODO: Yes we should validate that the user exists
-        User u = userDAO.findById(jwtUtil.extractUserId(token)).get();
+        User u = userDAO.findById(jwtUtil.extractUserId(strippedToken)).get();
 
         game.setUser(u);
 
