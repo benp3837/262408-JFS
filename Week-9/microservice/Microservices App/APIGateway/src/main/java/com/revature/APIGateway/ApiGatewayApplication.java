@@ -3,7 +3,8 @@ package com.revature.APIGateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/* Why: The API gateway is a FRONT CONTROLLER! It figures out where to send each request.
+/* Why: The API gateway is a FRONT CONTROLLER!
+It figures out where to send each request so we don't need to keep track of it.
 
 Without it, clients would need to know five different ports to use this app.
 
