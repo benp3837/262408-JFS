@@ -2,6 +2,28 @@
   padding: 2rem 2.5rem;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.subheader {
+  padding: 0 2.5rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.ditto {
+  height: 7em;
+  width: auto;
+  font-size: inherit;
+  animation: dance 0.6s steps(1) infinite;
+}
+
+@keyframes dance {
+  0%   { transform: scaleX(1); }
+  25%  { transform: scaleX(-1); }
+  50% { transform: scaleX(1); }
 }
 
 .bouncing-container {

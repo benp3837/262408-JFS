@@ -1,12 +1,17 @@
-<div class="dashboard-header">
-  <h2>{{ welcomeMessage }}</h2>
-  <p>refresh to get a new pokemon</p>
-</div>
+<div class="page">
+  <div class="dashboard-header">
+    <h2>{{welcomeMessage}}</h2>
+    <img src="/ditto.png" class="ditto" alt="ditto" />
+  </div>
+  <div class="subheader">
+    <p>Refresh to get a new pokemon</p>
+  </div>
 
-<div
-  class="bouncing-container"
-  [style.left.px]="x"
-  [style.top.px]="y">
-  <img src="/pokeball.png" class="pokeball-bg" alt="pokeball" />
-  <img [src]="imgSrc" class="bouncing-img" alt="bouncing pokemon" />
+  <div
+    class="bouncing-container"
+    [style.left.px]="x"
+    [style.top.px]="y">
+    <img src="/pokeball.png" class="pokeball-bg" alt="pokeball" />
+    <img [src]="imgSrc" class="bouncing-img" alt="bouncing pokemon" />
+  </div>
 </div>
