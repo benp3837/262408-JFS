@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8080/users';
+  private baseUrl = 'http://3.236.29.180:8080/users';
   username: string = '';
 
   constructor(private http: HttpClient) {}
