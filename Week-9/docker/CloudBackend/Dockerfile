@@ -1,3 +1,4 @@
+# FROM lets us base our Docker image off of an existing one
 # Base image — provides Java 21 runtime without needing to install it manually
 # eclipse-temurin is the official OpenJDK distribution, -jre means runtime only (smaller than -jdk)
 FROM eclipse-temurin:21-jre

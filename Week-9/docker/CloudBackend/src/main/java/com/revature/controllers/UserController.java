@@ -33,6 +33,6 @@ public class UserController {
 
     @GetMapping("/welcome/{username}")
     public ResponseEntity<String> welcome(@PathVariable String username) {
-        return ResponseEntity.ok("Hi there, " + username + "!");
+        return ResponseEntity.ok("Hi there, " + username + "!" + " THIS IS A NEW LINE OF TEXT!");
     }
 }
