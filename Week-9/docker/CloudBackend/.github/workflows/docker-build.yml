@@ -1,0 +1,47 @@
+name: Build and Push Docker Image
+
+# This Github Action triggers whenever code is pushed to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    # GitHub spins up a fresh Ubuntu VM to run these steps
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1 — Check out the repo code onto the VM
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2 — Install Java 21 on the VM
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # Step 3 — Build the JAR with Maven (skipping tests to keep it fast)
+      # I didn't write any tests anyway lolll
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      # Step 4 — Log into DockerHub using secrets stored in GitHub
+      # Never put credentials directly in the YAML!! always use secrets
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 5 — Build the Docker image and push it to DockerHub
+      # context: . means use the Dockerfile in the current directory
+      # :latest tag means this is always the most recent version
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-backend:latest
