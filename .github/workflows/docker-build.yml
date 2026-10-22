@@ -26,6 +26,7 @@ jobs:
       # Step 3 — Build the JAR with Maven (skipping tests to keep it fast)
       # I didn't write any tests anyway lolll
       - name: Build with Maven
+        working-directory: Week-9/docker/CloudBackend
         run: mvn clean package -DskipTests
 
       # Step 4 — Log into DockerHub using secrets stored in GitHub
@@ -42,7 +43,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: Week-9/docker/CloudBackend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-backend:latest
 
