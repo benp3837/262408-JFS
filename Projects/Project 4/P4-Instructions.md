@@ -1,4 +1,4 @@
-# Project Specification: Documentation Digester
+# Project Specification: Documentation Digester Chatbot
 
 ## 1. Overview
 Welcome to **Documentation Digester**! You have reached the final frontier of the curriculum. 
