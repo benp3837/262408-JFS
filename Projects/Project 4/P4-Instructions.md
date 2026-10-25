@@ -3,17 +3,17 @@
 ## 1. Overview
 Welcome to **Documentation Digester**! You have reached the final frontier of the curriculum. 
 
-In the previous projects, you built engines and dashboards. Now, you are going to build a **Full Stack Chatbot with Semantic Search Capabilities**. Your mission is to ingest the massive, complex official documentation of the Godot Game Engine and transform it into a high-precision retrieval system.
+In the previous projects, you built engines and dashboards. Now, you are going to build a **Full Stack Chatbot with Semantic Search Capabilities**. Your mission is to ingest some documentation of your choice, and transform it into a conversational, precise retrieval system.
 
-This isn's a standard "keyword search." You are building a system that understands **meaning**. When a user asks a question in plain English, your engine should be able to find the exact paragraph in the documentation that contains the answer, even if the exact words don't match.
+This isn's a standard "keyword search." You are building a system that understands **meaning**. When a user asks a question in plain English, your engine should be able to find the exact chunk of documentation that contains the answer, even if the exact words don't match.
 
 ## 2. Your Mission (The Semantic Pipeline)
-Your team is responsible for building a specialized data pipeline that follows a "Source-to-Search" workflow.
+Your team is responsible for building a specialized data retrieval pipeline that follows a "Source-to-Search" workflow.
 
 ### Phase 1: Data Ingestion
-After choosing a theme for your chatbot, you must ingest some proprietary data that it can refer to.
+After choosing a theme for your chatbot, you must ingest some proprietary data that it can refer to in order to answer the user's questions.
 * **Create your data:** Find and ingest data somehow! You can write (or generate) your own text files, scrape the web for documents or code, or use relational database data to gather the data accessible to your chatbot.
-* **Data Cleaning:** Raw documentation is "noisy." You must write logic to strip out any irrelevant or meaningless information in generated responses. Your chatbot should never generate irrelevant or incorrect information!
+* **Data Cleaning:** Raw documentation can be "noisy", even after retrieval. You must write logic to strip out any irrelevant or meaningless information in generated responses. Your chatbot should never generate irrelevant or incorrect information! It should also be capable of saying it doesn't know, or refusing to answer irrelevant or inappropriate questions.
 * **Semantic Chunking:** You cannot just split text by character count. You must implement "smart chunking" (e.g., splitting by headers or logical sections) so that every piece of data maintains its context.
 * **Vectorization:** You will use local embedding models to turn these text chunks into mathematical vectors and store them in a **Vector Database**. This is what will accomplish your semantic search capabilities.
 
