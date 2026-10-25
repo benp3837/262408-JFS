@@ -5,7 +5,7 @@ Welcome to **Documentation Digester**! You have reached the final frontier of th
 
 In the previous projects, you built engines and dashboards. Now, you are going to build a **Full Stack Chatbot with Semantic Search Capabilities**. Your mission is to ingest some documentation of your choice, and transform it into a conversational, precise retrieval system.
 
-This isn's a standard "keyword search." You are building a system that understands **meaning**. When a user asks a question in plain English, your engine should be able to find the exact chunk of documentation that contains the answer, even if the exact words don't match.
+This isn't a standard "keyword search." You are building a system that understands **meaning**. When a user asks a question in plain English, your engine should be able to find the exact chunk of documentation that contains the answer, even if the exact words don't match.
 
 ## 2. Your Mission (The Semantic Pipeline)
 Your team is responsible for building a specialized data retrieval pipeline that follows a "Source-to-Search" workflow.
