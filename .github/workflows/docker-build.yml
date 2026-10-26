@@ -47,4 +47,17 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-backend:latest
 
+      # NEW: Step 6 — Deploy the JAR directly to Elastic Beanstalk
+      # No SSH, no docker pull — AWS handles the deploy automatically
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: docker-backend
+          environment_name: docker-backend-env
+          region: us-east-1
+          version_label: ${{ github.sha }}
+          deployment_package: Week-9/docker/CloudBackend/target/DockerBackend-0.0.1-SNAPSHOT.jar
+
 # Comment that I'll change to show actions working
