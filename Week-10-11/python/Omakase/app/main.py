@@ -10,7 +10,7 @@ We'll be creating an Omakase-ish CLI that demonstrates:
 """
 from operator import truediv
 
-from app.restaurant_util import generate_menu
+from app.restaurant_util import generate_menu, generate_bill
 
 print("""
                   *===========####===========*
@@ -37,15 +37,15 @@ while hungry:
 
     print(generated_menu)
 
-    # Give the user the bill for their meal
-    print("Here's your bill!")
-
     # Toggle the while loop boolean (or not)
     print("Are you still hungry? (yes/no)")
     still_hungry = input("> ").strip().lower()
 
     if still_hungry == "no":
         hungry = False
+        # Give the user the bill for their meal
+        print(f"Here's your bill: ${generate_bill()}")
+        # Say goodbye
         print("Thanks for coming, see you next time!")
     else:
         print("Great, let's make you another meal!")
