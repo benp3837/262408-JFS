@@ -54,8 +54,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: cloud-backend
-          environment_name: cloud-backend-env
+          application_name: cloud-backend2
+          environment_name: cloud-backend2-env
           region: us-east-1
           version_label: ${{ github.sha }}
           deployment_package: Week-9/docker/CloudBackend/target/DockerBackend-0.0.1-SNAPSHOT.jar
