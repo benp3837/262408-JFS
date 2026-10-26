@@ -37,8 +37,8 @@ while hungry:
 
     print(generated_menu)
 
-    # TODO: serve the user and give them a price
-    print("Here is your meal! Here's your bill!")
+    # Give the user the bill for their meal
+    print("Here's your bill!")
 
     # Toggle the while loop boolean (or not)
     print("Are you still hungry? (yes/no)")
