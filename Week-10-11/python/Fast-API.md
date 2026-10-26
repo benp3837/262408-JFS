@@ -1,5 +1,7 @@
 # FastAPI
 
+* my notes: https://docs.google.com/document/d/14cLv9D5SA_pOkVLwGIbjUaOoSUMYnv5Y/edit?usp=sharing&ouid=116178657849214355990&rtpof=true&sd=true
+
 ## Table of Contents
 
 * [1. High-Level Overview](#1-high-level-overview)

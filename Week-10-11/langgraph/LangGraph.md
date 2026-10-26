@@ -1,5 +1,7 @@
 # LangGraph
 
+* My notes: https://docs.google.com/document/d/1T0RNm296O-GkFUJApd5BpzwQMJ53O3B05JOnKuPwTKU/edit?usp=sharing
+
 ## Table of Contents
 
 * [1. High-Level Overview](#1-high-level-overview)

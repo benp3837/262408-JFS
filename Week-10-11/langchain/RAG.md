@@ -1,5 +1,7 @@
 # Retrieval-Augmented Generation (RAG)
 
+* Notes on VectorDB, which we'll use for RAG: https://docs.google.com/document/d/10iaJ2pxuAyUpap3q5zKx2WvSKXqK4tAp/edit?usp=sharing&ouid=116178657849214355990&rtpof=true&sd=true
+
 ## Table of Contents
 
 * [1. High-Level Overview](#1-high-level-overview)

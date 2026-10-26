@@ -7,6 +7,8 @@ We'll be creating an Omakase-ish CLI that demonstrates:
 -Data Structures (lists, dictionaries)
 -Control Flow
 -Functions
+-Exceptions
+-File output
 """
 from operator import truediv
 

@@ -1,5 +1,7 @@
 # LangChain
 
+* my notes: https://docs.google.com/document/d/1KGKqzwg03zp-TM8pdUxlfwFH8nkdmTK-njHTfdvT3DY/edit?usp=sharing
+
 ## Table of Contents
 
 * [1. High-Level Overview](#1-high-level-overview)
