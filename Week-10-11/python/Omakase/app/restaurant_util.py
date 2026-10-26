@@ -21,6 +21,5 @@ def generate_menu():
 
     return eaten_foods
 
-
 # Function to serve the user, and save meals above
 

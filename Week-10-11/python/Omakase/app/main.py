@@ -10,6 +10,8 @@ We'll be creating an Omakase-ish CLI that demonstrates:
 """
 from operator import truediv
 
+from app.restaurant_util import generate_menu
+
 print("""
                   *===========####===========*
                   Welcome to the Omakase CLI!
@@ -30,10 +32,10 @@ hungry = True
 # While loop that depends on "Hungry"
 while hungry:
 
-    # TODO: abstract this into a function
-    appetizer = input("Name your favorite snack: ")
-    entree = input("Name your favorite protein: ")
-    dessert = input("Name your favorite sweet treat: ")
+    # Call generate menu to get the user's foods and show a menu
+    generated_menu = generate_menu()
+
+    print(generated_menu)
 
     # TODO: serve the user and give them a price
     print("Here is your meal! Here's your bill!")
