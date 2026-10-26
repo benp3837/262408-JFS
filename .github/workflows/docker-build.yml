@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image & Elastic Beanstalk Deployment
 
 # This Github Action triggers whenever code is pushed to the main branch
 on:
