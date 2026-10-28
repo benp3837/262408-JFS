@@ -1,4 +1,4 @@
-# Sample AI-Powered Python Project
+# Sample AI-Powered Python Project (GamerStop)
 
 This is a sample AI-powered Python project from a prior cohort that demonstrates various final-qc topics, including FastAPI, LangChain, AWS Bedrock, and more. It's a little messy, but it's full of project-based examples - it's a FastAPI app, powered by LangChain and VectorDB for chat and RAG functionality.
 
