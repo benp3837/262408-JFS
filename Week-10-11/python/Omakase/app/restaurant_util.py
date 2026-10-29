@@ -1,3 +1,5 @@
+import pandas as pd
+
 # Dictionary that stores the meals the user has eaten
 # KEY VALUE PAIRS! String keys and lists for items
 eaten_foods = {
@@ -66,6 +68,38 @@ def generate_bill():
 
     # Return the bill!
     return bill
+
+
+# A function to calculate some metrics on "current" market prices
+def market_analysis():
+
+    # Hardcoded market prices
+    prices = {
+        "Bluefin Tuna": 42.50,
+        "Yellowtail":   28.00,
+        "Salmon":       18.75,
+        "Uni":          65.00,
+        "Hamachi":      31.00,
+        "Snapper":      22.50,
+        "Mackerel":     14.00,
+        "Scallop":      35.00,
+    }
+
+    # Turning the market prices into a DataFrame.
+    # This gives us super useful and easy to use data analysis methods from Pandas
+    df = pd.DataFrame(list(prices.items()), columns=["Fish", "Price"])
+
+    print(df.to_string(index=False))
+    print()
+    print(f"Average:    ${df['Price'].mean():.2f}")
+    print(f"Median:     ${df['Price'].median():.2f}")
+    print(f"Std Dev:    ${df['Price'].std():.2f}")
+    print()
+    print("Most expensive:")
+    print(df.loc[df['Price'].idxmax()])
+    print()
+    print("Under $25:")
+    print(df[df['Price'] < 25].to_string(index=False))
 
 
 # Custom Exception -------------

@@ -1,0 +1,7 @@
+Your Bill:
+====================
+Appetizers: 3 items
+Entrees: 3 items
+Desserts: 3 items
+====================
+Total: $90

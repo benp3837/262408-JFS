@@ -9,6 +9,7 @@ We'll be creating an Omakase-ish CLI that demonstrates:
 -Functions
 -Exceptions
 -File output
+-Pandas for basic data analysis
 """
 from operator import truediv
 
