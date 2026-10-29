@@ -13,7 +13,7 @@ We'll be creating an Omakase-ish CLI that demonstrates:
 """
 from operator import truediv
 
-from app.restaurant_util import generate_menu, generate_bill, HotDogException
+from app.restaurant_util import generate_menu, generate_bill, HotDogException, market_analysis
 
 print("""
                   *===========####===========*
@@ -27,7 +27,9 @@ We'll create a curated dining experience based on your favorite foods
 print("First, what's your name?")
 name = input(">")
 
-# TODO - if name == "merchant", show market prices and analysis
+# if name == "merchant", show market prices and analysis
+if name.lower() == "merchant":
+    market_analysis()
 
 print(f"Nice to meet you {name}!")
 
