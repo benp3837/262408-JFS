@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from pydantic import SecretStr
 
 from models.monster_model import MonsterModel
+from services.langchain_service import get_general_chain
 
 # Every router gets set up like this:
 router = APIRouter(
@@ -33,3 +34,18 @@ async def insert_monster(monster:MonsterModel):
     monster_db.append(monster)
 
     return {"output": monster}
+
+
+# 2 routes that talk to the LLM via LangChain service --------
+
+@router.get("/chat")
+async def general_chat(input:str):
+
+    # Get the chain
+    chain = get_general_chain()
+
+    # Return the invocation of the string
+    return chain.invoke({"input":input})
+
+# TODO: How can we get the LLM to answer questions based on the monster data?
+# This is the concept of RAG which you'll need for your project

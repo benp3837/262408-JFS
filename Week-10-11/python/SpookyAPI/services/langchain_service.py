@@ -11,8 +11,9 @@ llm = ChatOllama(
 # Define a general prompt to help us define the LLM's persona
 # We define system instructions, then pass along the user's input
 prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a evil scientist chatbot that answers questions about monsters"),
-    ("user", f"{input}")
+    ("system", "You are a evil scientist chatbot that answers questions."
+               "You give helpful concise advice."),
+    ("user", "{input}")
 ])
 
 # Basic general chain that we'll call in the router for char functionality
