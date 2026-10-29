@@ -12,7 +12,7 @@ We'll be creating an Omakase-ish CLI that demonstrates:
 """
 from operator import truediv
 
-from app.restaurant_util import generate_menu, generate_bill
+from app.restaurant_util import generate_menu, generate_bill, HotDogException
 
 print("""
                   *===========####===========*
@@ -26,6 +26,8 @@ We'll create a curated dining experience based on your favorite foods
 print("First, what's your name?")
 name = input(">")
 
+# TODO - if name == "merchant", show market prices and analysis
+
 print(f"Nice to meet you {name}!")
 
 # This boolean will determine whether the app continues running
@@ -35,9 +37,15 @@ hungry = True
 while hungry:
 
     # Call generate menu to get the user's foods and show a menu
-    generated_menu = generate_menu()
 
-    print(generated_menu)
+    # NOW in a try-except block to catch the HotDogException
+    try:
+        generated_menu = generate_menu()
+        print(generated_menu)
+    except HotDogException as e:
+        print(e.message)
+    finally:
+        print("Still hungry? Order better then.")
 
     # Toggle the while loop boolean (or not)
     print("Are you still hungry? (yes/no)")

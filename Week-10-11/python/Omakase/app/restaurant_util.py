@@ -12,8 +12,6 @@ bill = 0
 # Function to get the User's fav foods and return the menu
 def generate_menu():
 
-    # TODO: raise an exception if the user says ______
-
     appetizer = input("Name your favorite snack: ")
     eaten_foods["appetizers"].append(appetizer)
 
@@ -22,6 +20,10 @@ def generate_menu():
 
     dessert = input("Name your favorite sweet treat: ")
     eaten_foods["desserts"].append(dessert)
+
+    # raise a custom exception if the user says "hot dog"
+    if "hot dog" in [appetizer.lower(), entree.lower(), dessert.lower()]:
+        raise HotDogException()
 
     print("Here's your meal!")
     menu = f"""
@@ -53,8 +55,25 @@ def generate_bill():
     for category, items in eaten_foods.items():
         bill += len(items) * prices[category]
 
+    # Generate and output a txt file of the bill
+    with open("bill.txt", "w") as file:
+        file.write("Your Bill:\n")
+        file.write("====================\n")
+        for category, items in eaten_foods.items():
+            file.write(f"{category.capitalize()}: {len(items)} items\n")
+        file.write("====================\n")
+        file.write(f"Total: ${bill}\n")
+
     # Return the bill!
     return bill
 
-    # TODO: file output of the bill
 
+# Custom Exception -------------
+
+# Custom exception inherits from Exception
+class HotDogException(Exception):
+
+    # This is the constructor, created with a "dunder" method AKA "double-underscore method"
+    def __init__(self, message="Hot dogs are an unserious food"):
+        self.message = message
+        super().__init__(self.message) # call the super constructor
