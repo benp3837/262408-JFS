@@ -1,7 +1,8 @@
 # FastAPI Routers share a use case with Spring Controllers
 # They take in HTTP requests, and return HTTP responses
 from fastapi import APIRouter
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader, CSVLoader
+from langchain_core.output_parsers import PydanticOutputParser
 from pydantic import SecretStr, BaseModel
 
 from app.models.monster_model import MonsterModel
@@ -102,10 +103,64 @@ async def evil_rambling_chat(chat:ChatInputModel):
     })
 
 
-# TODO: document loader - csv
+# Document Loader - csv (mostly the same as txt, just some different objects/strats)
+@router.post("/csv_chat")
+async def monster_status_chat(chat:ChatInputModel):
+
+    # Load in the csv, and extract it
+    loader = CSVLoader("app/files_to_load/monster_statuses.csv")
+
+    stored_csv = loader.load()
+
+    # Extraction is slightly different - load all records into a single string
+    extracted_data = "\n".join(doc.page_content for doc in stored_csv)
+
+    print(extracted_data)
+
+    # Invoke the LLM!
+    return chain.invoke({
+        "input":f"""
+        
+        Based on the provided CSV data, answer the user's questions. Be analytical.
+        If the user isn't asking for analysis or overviews, ONLY say "Ask about analysis".
+        
+        The CSV: {extracted_data}
+        
+        The user's query: {chat.input}
+        """
+    })
 
 
-# TODO: output parser - Pydantic
+# Output Parser - Pydantic
+# Output parsers take the LLM's response and turn them into a specific format
+# TODO: this isn't working, I'll get it to work or switch to a list etc.
+@router.get("/monster_rec")
+async def get_monster_recommendation(characteristic:str):
 
+    # Langchain's built-in PydanticParser to parse output into Pydantic
+    parser = PydanticOutputParser(pydantic_object=MonsterModel)
+
+    # Testing out what the parser looks like - what it tells the LLM
+    instructions = parser.get_format_instructions()
+    print(instructions)
+
+    # First, store the output of the LLM (we parse it after)
+    output = chain.invoke({
+        "input":f"""
+            Make me a monster with this characteristic: {characteristic}
+            ONLY return the required JSON object. 
+            DON'T add any fields, just use the characteristic to determine the name.
+            Don't add anything besides the monster fields (id, name, motive).
+            
+            Format your response according to these instructions:
+            {instructions}
+        """
+    })
+
+    print(output.content)
+
+    # Here's the actual parsing into Pydantic:
+    return parser.parse(output.content)
 
 # TODO: chat with a memory chain
+

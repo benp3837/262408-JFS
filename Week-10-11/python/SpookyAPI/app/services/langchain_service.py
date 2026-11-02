@@ -25,3 +25,8 @@ def get_general_chain():
         # This will get returned to the router to get invoked
     return prompt | llm
 
+
+# Create a different chain that has conversational memory
+# This is gonna be very taxing on our local LLMs
+def get_memory_chain():
+    
