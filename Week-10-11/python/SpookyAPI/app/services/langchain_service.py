@@ -5,7 +5,7 @@ from langchain_ollama import ChatOllama
 # Define the LLM we're going to use
 llm = ChatOllama(
     model="llama3.2:3b",
-    temperature=.5 # from 0-1. higher temp = more creativity
+    temperature=.9 # from 0-1. higher temp = more creativity
 )
 
 # Define a general prompt to help us define the LLM's persona

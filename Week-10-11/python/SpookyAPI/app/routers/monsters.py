@@ -49,17 +49,57 @@ chain = get_general_chain()
 
 # Basic chat endpoint
 @router.post("/chat")
-async def general_chat(input:ChatInputModel):
+async def general_chat(chat:ChatInputModel):
 
     # Return the invocation of the string
-    return chain.invoke({"input":input})
+    return chain.invoke({"input":chat.input})
 
 # How can we get the LLM to answer questions based on the monster data?
 # This is our first look at RAG which you'll need for your project
+@router.post("/rag_chat")
+async def rag_chat(chat:ChatInputModel):
 
+    # This time, lets add the monster data plus some extra prompting
+    # Remember this is called a PROMPT TEMPLATE
+        # A prompt that takes in {variables} for dynamic behavior
+    return chain.invoke({
+        "input": f"""
+            Given this data on Monsters in the database, answer the user's question. 
+            If the monster is NOT in the DB, then you don't know. 
+            
+            BUT, if the user is asking for info RELATED to the monsters, 
+            you can pull from training data.
+            
+            The data: {monster_db}
+            
+            The User's query: {chat.input}
+        """
+    })
 
+# Document Loader - text
+@router.post("/txt_chat")
+async def evil_rambling_chat(chat:ChatInputModel):
 
-# TODO: document loader - text
+    # Loading in txt and other formats is easy - use Langchain's ___Loader Classes
+    loader = TextLoader("app/files_to_load/evil_rambling.txt", encoding="utf-8")
+
+    # Store the txt in a list of langchain Document object
+    stored_text = loader.load()
+
+    # Extract the text from the list
+    extracted_text = stored_text[0].page_content
+
+    # Invoke the LLM with the user's query and the extracted data
+    return chain.invoke({
+        "input":f"""
+            Based on the ingest txt file, answer the user's question.
+            Do NOT refer to the user in your answer. Respond in first person.
+            
+            The txt file: {extracted_text}
+            
+            The user's query: {chat.input}
+        """
+    })
 
 
 # TODO: document loader - csv
