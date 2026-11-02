@@ -1,10 +1,11 @@
 # FastAPI Routers share a use case with Spring Controllers
 # They take in HTTP requests, and return HTTP responses
 from fastapi import APIRouter
+from langchain_community.document_loaders import TextLoader
 from pydantic import SecretStr
 
-from models.monster_model import MonsterModel
-from services.langchain_service import get_general_chain
+from app.models.monster_model import MonsterModel
+from app.services.langchain_service import get_general_chain
 
 # Every router gets set up like this:
 router = APIRouter(
@@ -35,9 +36,15 @@ async def insert_monster(monster:MonsterModel):
 
     return {"output": monster}
 
+# -------------------------------------------------------------------------------
 
-# 2 routes that talk to the LLM via LangChain service --------
+# TODO: ChatInputModel
 
+# TODO: Move general chain up here
+
+# Now for routes that talk to the LLM via LangChain service --------
+
+# Basic chat endpoint
 @router.get("/chat")
 async def general_chat(input:str):
 
@@ -48,4 +55,16 @@ async def general_chat(input:str):
     return chain.invoke({"input":input})
 
 # TODO: How can we get the LLM to answer questions based on the monster data?
-# This is the concept of RAG which you'll need for your project
+# This is our first look at RAG which you'll need for your project
+
+
+# TODO: document loader - text
+
+
+# TODO: document loader - csv
+
+
+# TODO: output parser - Pydantic
+
+
+# TODO: chat with a memory chain

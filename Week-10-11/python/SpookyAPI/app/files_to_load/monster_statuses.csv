@@ -1,0 +1,21 @@
+monster_id,name,threat_level,containment_status
+001,Vordaketh,9,Contained
+002,Slithering Maw,6,At Large
+003,The Pale Watcher,8,Contained
+004,Grunwick,3,Neutralized
+005,Hollow Shriek,7,At Large
+006,Bonecrawler,5,Contained
+007,Mirefiend,4,Neutralized
+008,The Unblinking,10,At Large
+009,Festerveil,6,Contained
+010,Dusksnapper,3,Neutralized
+011,Krauveth,8,At Large
+012,Silt Horror,5,Contained
+013,The Gaunt,9,At Large
+014,Ashwalker,4,Neutralized
+015,Mossbound,2,Neutralized
+016,Vexling,6,Contained
+017,The Deep Murmur,7,At Large
+018,Cinderfang,5,Contained
+019,Nullwraith,10,Contained
+020,Sable Creep,3,Neutralized

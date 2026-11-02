@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from routers import monsters
+from app.routers import monsters
 
 # Set up FastAPI. We'll use this "app" variable to do FastAPI stuff below
 app = FastAPI()
