@@ -6,7 +6,7 @@ from langchain_core.output_parsers import PydanticOutputParser
 from pydantic import SecretStr, BaseModel
 
 from app.models.monster_model import MonsterModel
-from app.services.langchain_service import get_general_chain
+from app.services.langchain_service import get_general_chain, get_memory_chain
 
 # Every router gets set up like this:
 router = APIRouter(
@@ -132,13 +132,21 @@ async def monster_status_chat(chat:ChatInputModel):
 
 
 # Output Parser - Pydantic
+
+# Need a Monster Model with the motive as a regular str,
+# cuz secretstr broke/confused our weak LLM
+class MonsterModelRaw(BaseModel):
+    id: int = 0
+    name: str
+    motive: str
+
 # Output parsers take the LLM's response and turn them into a specific format
 # TODO: this isn't working, I'll get it to work or switch to a list etc.
 @router.get("/monster_rec")
 async def get_monster_recommendation(characteristic:str):
 
     # Langchain's built-in PydanticParser to parse output into Pydantic
-    parser = PydanticOutputParser(pydantic_object=MonsterModel)
+    parser = PydanticOutputParser(pydantic_object=MonsterModelRaw)
 
     # Testing out what the parser looks like - what it tells the LLM
     instructions = parser.get_format_instructions()
@@ -148,9 +156,11 @@ async def get_monster_recommendation(characteristic:str):
     output = chain.invoke({
         "input":f"""
             Make me a monster with this characteristic: {characteristic}
-            ONLY return the required JSON object. 
-            DON'T add any fields, just use the characteristic to determine the name.
-            Don't add anything besides the monster fields (id, name, motive).
+            
+            Return ONLY a JSON object like this example:
+            {{"id": 1, "name": "Bonecrawler", "motive": "seeks warmth"}}
+        
+            Use those exact field names. No extra text, no schema, just the object.
             
             Format your response according to these instructions:
             {instructions}
@@ -159,8 +169,16 @@ async def get_monster_recommendation(characteristic:str):
 
     print(output.content)
 
+    # TODO: add it to the DB cleanly
+    monster_db.append(output.content)
+
     # Here's the actual parsing into Pydantic:
     return parser.parse(output.content)
 
-# TODO: chat with a memory chain
+# Chat function with a memory chain - first we need to get the memory chain from service
+memory_chain = get_memory_chain()
 
+@router.post("/memory_chat")
+async def chat_with_memory(chat:ChatInputModel):
+    # One liner just like the general chain chat
+    return memory_chain.invoke(input=chat.input)

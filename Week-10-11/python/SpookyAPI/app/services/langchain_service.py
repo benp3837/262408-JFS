@@ -1,4 +1,6 @@
 # TODO: Ben - talk about what this service will do
+from langchain_classic.chains.conversation.base import ConversationChain
+from langchain_classic.memory import ConversationBufferWindowMemory, ConversationSummaryMemory
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import ChatOllama
 
@@ -29,4 +31,28 @@ def get_general_chain():
 # Create a different chain that has conversational memory
 # This is gonna be very taxing on our local LLMs
 def get_memory_chain():
-    
+
+    # Create a memory object
+
+    # Window memory - remembers the last "k" interactions
+    ### memory = ConversationBufferWindowMemory(k=3)
+
+    # Summary memory - keeps a running paragraph of what we've talked about
+    memory = ConversationSummaryMemory(llm=llm)
+    # Our LLM is doing the summarization THEN generating a response... expensive
+
+    # Similar prompt, but with history attached
+    # These older memory classes expect a {history} prompt variable
+    memory_prompt = ChatPromptTemplate.from_messages([
+        ("system", "You are a evil scientist chatbot that answers questions."
+                   "You give helpful concise advice."),
+        ("user", "Conversation History: {history}"
+                 "Current Input: {input}")
+    ])
+
+    # Make and return a chain in the old fashioned way (NOT using LCEL)
+    return ConversationChain(
+        llm = llm,
+        memory = memory,
+        prompt = memory_prompt
+    )
