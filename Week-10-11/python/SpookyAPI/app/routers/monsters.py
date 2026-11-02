@@ -2,7 +2,7 @@
 # They take in HTTP requests, and return HTTP responses
 from fastapi import APIRouter
 from langchain_community.document_loaders import TextLoader
-from pydantic import SecretStr
+from pydantic import SecretStr, BaseModel
 
 from app.models.monster_model import MonsterModel
 from app.services.langchain_service import get_general_chain
@@ -38,24 +38,25 @@ async def insert_monster(monster:MonsterModel):
 
 # -------------------------------------------------------------------------------
 
-# TODO: ChatInputModel
+# ChatInputModel - used in our LLM functions to pass the user's query in the body
+class ChatInputModel(BaseModel):
+    input:str
 
-# TODO: Move general chain up here
+# Declare the general chain up here so we don't have to rewrite it
+chain = get_general_chain()
 
 # Now for routes that talk to the LLM via LangChain service --------
 
 # Basic chat endpoint
-@router.get("/chat")
-async def general_chat(input:str):
-
-    # Get the chain
-    chain = get_general_chain()
+@router.post("/chat")
+async def general_chat(input:ChatInputModel):
 
     # Return the invocation of the string
     return chain.invoke({"input":input})
 
-# TODO: How can we get the LLM to answer questions based on the monster data?
+# How can we get the LLM to answer questions based on the monster data?
 # This is our first look at RAG which you'll need for your project
+
 
 
 # TODO: document loader - text
