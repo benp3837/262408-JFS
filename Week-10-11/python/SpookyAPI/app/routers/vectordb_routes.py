@@ -16,7 +16,7 @@ router = APIRouter(
 class IngestJSON(BaseModel):
     id:str
     text:str
-    metadata:Any # Lazy, didn't wanna make a whole new object
+    metadata:Any = None # Lazy, didn't wanna make a whole new object
 
 # TODO: Pydantic Model for ingesting text
 

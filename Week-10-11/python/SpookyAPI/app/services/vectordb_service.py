@@ -3,6 +3,7 @@ from typing import Any
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_ollama import OllamaEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # This Service is full of functions that let our VectorDB work
 # Creating/Getting Collections, ingesting data, and searching that data
@@ -59,9 +60,38 @@ def ingest_json(collection_name:str, items:list[dict[str, Any]]):
     return len(embedded_docs)
 
 
-# TODO: Ingest text data into a Collection
+# Ingest text data into a Collection
+def ingest_text(collection_name:str, text:str, source_id:str):
 
+    # Basic cleanup - strip any whitespace
+    text = text.strip()
 
+    # CHUNK the raw text into smaller pieces using a LangChain Transformer
+    # Remember, with the JSON above, chunking was automatic. Here we have to define chunks
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=700, # every 700 characters, make a new chunk
+        chunk_overlap=100, # chunks will ovelap with each other by 100 chars (keeps context)
+        separators=["\n\n", "\n", ".", " "]
+    )
+
+    # Get our chunks as a list[str] so we can iterate and reformat
+    chunks = splitter.split_text(text)
+
+    # An empty list to hold the Document objects we'll make from the chunks
+    docs = []
+
+    # Generate a Object for each chunk, with a unique ID based on the source_id
+    # These are what will get embedded and stored in the VectorDB
+    for i, chunk in enumerate(chunks):
+
+        # Create a unique ID for each chunk based on source_id
+        chunk_id = f"{source_id}_chunk_{i}"
+
+        # Create a Document object for each chunk
+        docs.append({"id":chunk_id, "text":chunk})
+
+    # Ingest the chunks, and return it to see them
+    return ingest_json(collection_name, docs)
 
 
 # Here's the function that actually searches a Collection
