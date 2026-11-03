@@ -1,0 +1,62 @@
+[
+    {
+        "id": "tool_001",
+        "text": "Wooden stake. The classic vampire-slaying instrument. Driven through the heart to destroy the undead. Works on most standard vampire variants. Ineffective on elder vampires without a follow-up decapitation.",
+        "metadata": {"category": "vampire", "type": "melee", "rarity": "common"}
+    },
+    {
+        "id": "tool_002",
+        "text": "Holy water vial. Blessed water causes severe burns on contact with vampires, demons, and corrupted spirits. Can be thrown or used to consecrate a perimeter. Loses potency after 30 days.",
+        "metadata": {"category": "vampire", "type": "ranged", "rarity": "common"}
+    },
+    {
+        "id": "tool_003",
+        "text": "Silver blade. Pure silver edge effective against werewolves, shapeshifters, and certain fae creatures. Causes wounds that resist supernatural healing. Must be at least 92.5% silver to be effective.",
+        "metadata": {"category": "werewolf", "type": "melee", "rarity": "uncommon"}
+    },
+    {
+        "id": "tool_004",
+        "text": "Iron salt rounds. Shotgun shells packed with iron filings and sea salt. Disrupts incorporeal entities such as ghosts, wraiths, and shadow beings on contact. Does not permanently destroy them.",
+        "metadata": {"category": "ghost", "type": "ranged", "rarity": "uncommon"}
+    },
+    {
+        "id": "tool_005",
+        "text": "Spectral anchor. A carved obsidian disc that pins a ghost or spirit to a fixed location, preventing movement or possession. Must be placed within the spirit's haunt. Effective for 72 hours.",
+        "metadata": {"category": "ghost", "type": "trap", "rarity": "rare"}
+    },
+    {
+        "id": "tool_006",
+        "text": "Garlic braid. Dried garlic woven into a protective braid. Repels vampires and certain lesser demons when hung at entry points. Does not harm, only deters. Best used to secure a safe room.",
+        "metadata": {"category": "vampire", "type": "ward", "rarity": "common"}
+    },
+    {
+        "id": "tool_007",
+        "text": "Wolfsbane tincture. Concentrated extract of aconitum. Applied to weapons or used as a perimeter spray to repel and weaken werewolves. Toxic to humans in large doses. Handle with care.",
+        "metadata": {"category": "werewolf", "type": "chemical", "rarity": "uncommon"}
+    },
+    {
+        "id": "tool_008",
+        "text": "Banishment sigil kit. Pre-drawn sigil templates on treated parchment. Activated by blood or flame to force demonic entities back to their plane of origin. Single use. Includes 5 sigils.",
+        "metadata": {"category": "demon", "type": "ritual", "rarity": "rare"}
+    },
+    {
+        "id": "tool_009",
+        "text": "UV emitter grenade. Compact device that emits a burst of ultraviolet light equivalent to direct sunlight. Effective against photosensitive vampires and certain cave-dwelling creatures. 10 meter radius.",
+        "metadata": {"category": "vampire", "type": "ranged", "rarity": "rare"}
+    },
+    {
+        "id": "tool_010",
+        "text": "Salt circle kit. Coarse sea salt in a dispenser designed for rapid circle deployment. Ghosts, demons, and bound spirits cannot cross an unbroken salt line. Ineffective in wind or rain.",
+        "metadata": {"category": "ghost", "type": "ward", "rarity": "common"}
+    },
+    {
+        "id": "tool_011",
+        "text": "Iron chain bindings. Heavy iron manacles and chain for restraining werewolves during lunar cycles. Iron disrupts shapeshifter transformation partially. Rated for 800 pounds of force.",
+        "metadata": {"category": "werewolf", "type": "restraint", "rarity": "uncommon"}
+    },
+    {
+        "id": "tool_012",
+        "text": "Exorcism scroll. Handwritten Latin exorcism ritual on consecrated vellum. Reciting aloud forces demonic possession to release its host and expels the entity. Requires 4 minutes of uninterrupted reading.",
+        "metadata": {"category": "demon", "type": "ritual", "rarity": "rare"}
+    }
+]

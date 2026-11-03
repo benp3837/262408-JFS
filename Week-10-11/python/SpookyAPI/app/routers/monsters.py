@@ -141,7 +141,7 @@ class MonsterModelRaw(BaseModel):
     motive: str
 
 # Output parsers take the LLM's response and turn them into a specific format
-# TODO: this isn't working, I'll get it to work or switch to a list etc.
+# TODO: this only works half the time... Local model issue
 @router.get("/monster_rec")
 async def get_monster_recommendation(characteristic:str):
 
@@ -169,7 +169,7 @@ async def get_monster_recommendation(characteristic:str):
 
     print(output.content)
 
-    # TODO: add it to the DB cleanly
+    # TODO: add it to the DB cleanly - this just throws a string in
     monster_db.append(output.content)
 
     # Here's the actual parsing into Pydantic:
