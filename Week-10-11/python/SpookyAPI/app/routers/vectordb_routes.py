@@ -4,7 +4,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.services.langchain_service import get_general_chain
-from app.services.vectordb_service import ingest_json, search_collection
+from app.services.vectordb_service import ingest_json, search_collection, ingest_text
 
 # Set up the router (we do this in every router)
 router = APIRouter(
@@ -12,7 +12,7 @@ router = APIRouter(
     tags=["vectordb"]
 )
 
-# Pydantic Model for ingesting JSON
+# Pydantic Model for ingesting Data
 class IngestData(BaseModel):
     id:str
     text:str
@@ -89,9 +89,10 @@ async def submit_text(text:IngestData):
 
     # Call the service method that ingests TEXT
     # Save the result so we have the count of ingestions
-    ingested_items = ingest_json(
+    ingested_items = ingest_text(
         collection_name="monster_incident_reports",
-        items=[text.dict()]
+        text=text.text,
+        source_id=text.id
     )
 
     return {"ingested_items": ingested_items}

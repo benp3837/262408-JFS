@@ -78,6 +78,7 @@ def ingest_text(collection_name:str, text:str, source_id:str):
     chunks = splitter.split_text(text)
 
     print(chunks)
+    print("CHUNK LENGTH--------")
     print(len(chunks))
 
     # An empty list to hold the Document objects we'll make from the chunks
