@@ -13,12 +13,10 @@ router = APIRouter(
 )
 
 # Pydantic Model for ingesting JSON
-class IngestJSON(BaseModel):
+class IngestData(BaseModel):
     id:str
     text:str
     metadata:Any = None # Lazy, didn't wanna make a whole new object
-
-# TODO: Pydantic Model for ingesting text
 
 # Import our basic chain for LLM operations
 chain = get_general_chain()
@@ -26,7 +24,7 @@ chain = get_general_chain()
 
 # Ingest JSON endpoint
 @router.post("/submit_json")
-async def submit_json(items:list[IngestJSON]):
+async def submit_json(items:list[IngestData]):
 
     # Call the service method that ingests JSON
     # Save the result so we have the count of ingestions
@@ -84,4 +82,17 @@ async def tools_rag(query:str):
     })
 
 
+# Text ingestion and querying ---------------------------------------
+
+@router.post("/submit_text")
+async def submit_text(text:IngestData):
+
+    # Call the service method that ingests TEXT
+    # Save the result so we have the count of ingestions
+    ingested_items = ingest_json(
+        collection_name="monster_incident_reports",
+        items=[text.dict()]
+    )
+
+    return {"ingested_items": ingested_items}
 

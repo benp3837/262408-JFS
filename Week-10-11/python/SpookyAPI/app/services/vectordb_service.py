@@ -77,6 +77,9 @@ def ingest_text(collection_name:str, text:str, source_id:str):
     # Get our chunks as a list[str] so we can iterate and reformat
     chunks = splitter.split_text(text)
 
+    print(chunks)
+    print(len(chunks))
+
     # An empty list to hold the Document objects we'll make from the chunks
     docs = []
 
