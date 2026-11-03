@@ -44,6 +44,8 @@ def ingest_json(collection_name:str, items:list[dict[str, Any]]):
                  for item in items
     ]
 
+    print(items)
+
     # Attach IDs to each Document (easy since the JSON has an "id" field)
     ids = [item["id"] for item in items]
 
@@ -58,3 +60,18 @@ def ingest_json(collection_name:str, items:list[dict[str, Any]]):
 
 
 # TODO: Ingest text data into a Collection
+
+
+
+
+# Here's the function that actually searches a Collection
+def search_collection(collection_name:str, query:str, k:int=5):
+
+    # Get collection
+    collection = create_or_get_collection(collection_name)
+
+    # Perform the similarity search
+    # This is a RETRIEVER, we're using it to RETRIEVE data for an LLM response
+    results = collection.similarity_search_with_score(query, k)
+
+    return results

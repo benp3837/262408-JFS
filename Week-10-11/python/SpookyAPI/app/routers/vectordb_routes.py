@@ -1,8 +1,10 @@
+from typing import Any
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.services.langchain_service import get_general_chain
-from app.services.vectordb_service import ingest_json
+from app.services.vectordb_service import ingest_json, search_collection
 
 # Set up the router (we do this in every router)
 router = APIRouter(
@@ -12,7 +14,9 @@ router = APIRouter(
 
 # Pydantic Model for ingesting JSON
 class IngestJSON(BaseModel):
+    id:str
     text:str
+    metadata:Any # Lazy, didn't wanna make a whole new object
 
 # TODO: Pydantic Model for ingesting text
 
@@ -37,8 +41,18 @@ async def submit_json(items:list[IngestJSON]):
 
 # Similarity search endpoint for MONSTER FIGHTING TOOLS
 # (NOT RAG yet)
+@router.get("/search_monster_tools")
+async def search_tools(query:str):
 
 
+    # Call the Service method to search the collection
+    results = search_collection(
+        collection_name="monster_fighting_tools",
+        query=query
+        # We COULD set the k value here, or just let default to 5
+    )
+
+    return results
 
 # RAG endpoint for MONSTER FIGHTING TOOLS
 
