@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.routers import monsters
+from app.routers import monsters, vectordb_routes
 
 # Set up FastAPI. We'll use this "app" variable to do FastAPI stuff below
 app = FastAPI()
@@ -9,6 +9,7 @@ app = FastAPI()
 
 # import/activate the routers here
 app.include_router(monsters.router)
+app.include_router(vectordb_routes.router)
 
 
 # Generic sample endpoint (GET request with a greeting)
