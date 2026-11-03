@@ -1,6 +1,6 @@
 # LangChain
 
-* my notes: https://docs.google.com/document/d/1KGKqzwg03zp-TM8pdUxlfwFH8nkdmTK-njHTfdvT3DY/edit?usp=sharing
+* my notes: https://docs.google.com/document/d/1nTUsqPEZwYFOSOyLzY_BevgW9EiIj79w/edit?usp=sharing&ouid=116178657849214355990&rtpof=true&sd=true
 
 ## Table of Contents
 
