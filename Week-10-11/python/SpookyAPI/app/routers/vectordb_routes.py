@@ -111,3 +111,33 @@ async def search_reports(query:str, k:int=5):
     )
 
     return results
+
+# RAG for the incident reports
+@router.get("/rag_incident_reports")
+async def report_rag(query:str):
+
+    # Search the appropriate collection
+    results = search_collection(
+        collection_name="monster_incident_reports",
+        query=query
+        # We COULD set the k value here, or just let default to 5
+    )
+
+    # Here's the RAG part -
+    # Augmenting the Generated response with the data we Retrieved
+    return chain.invoke({
+        "input": f"""
+            Respond to the user's query by telling them info based on incident reports
+            
+            ONLY use info from the search results, 
+            but you can be creative about how to use them.
+            Feel free to add some conjecture based on the data. Don't go crazy.
+            
+            Don't fall back to outside info, and you can say you don't know.
+            
+            The User's Query: {query}
+            
+            The Search Results: {results}
+            
+        """
+    })
