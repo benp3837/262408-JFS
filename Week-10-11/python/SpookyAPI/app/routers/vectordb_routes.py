@@ -46,8 +46,9 @@ async def search_tools(query:str, k:int=5):
     # Call the Service method to search the collection
     results = search_collection(
         collection_name="monster_fighting_tools",
-        query=query
+        query=query,
         # We COULD set the k value here, or just let default to 5
+        k=k
     )
 
     return results
@@ -97,3 +98,16 @@ async def submit_text(text:IngestData):
 
     return {"ingested_items": ingested_items}
 
+
+# Just retrieve chunks, no RAG
+@router.get("/search_incident_reports")
+async def search_reports(query:str, k:int=5):
+
+    # Call the Service method to search the collection
+    results = search_collection(
+        collection_name="monster_incident_reports",
+        query=query,
+        k=k
+    )
+
+    return results
