@@ -3,7 +3,7 @@ from typing import TypedDict, Annotated, Any
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage
 from langchain_core.tools import tool
 from langchain_ollama import ChatOllama
-from langgraph.graph import add_messages
+from langgraph.graph import add_messages, StateGraph
 
 from app.services.vectordb_service import search_collection
 
@@ -109,9 +109,66 @@ def agentic_router_node(state:GraphState) -> GraphState:
         HumanMessage(content=query)
     ]
 
+    # Call the LLM, which will choose which tool to call
+    response = llm_with_tools.invoke(messages)
+    # This response contains the tool call
+
+    print(response.tool_calls) # Just to see what was called
+
+    # Invoke whatever tool was called and store the results in state
+    for tool_call in response.tool_calls:
+
+        tool_name = tool_call["name"]
+        tool_function = TOOL_MAP[tool_name]
+        tool_result = tool_function.invoke("query")
+
+        print(tool_result) # Visibility
+
+        # Save the result in state - this data will be used for RAG in the next node
+        return {"docs": tool_result}
+
+# One more node - does the RAG with the data stored in state
+def rag_node(state:GraphState) -> GraphState:
+
+    # Get the query and docs from state
+    query = state.get("query")
+    docs = state.get("docs")
+
+    prompt = f"""Respond to the user's Query based on the provided Search Results.
+                ONLY use the provided search results, or say you don't know.
+                
+                The User's Query: {query}
+                The Search Results: {docs}
+            """
+
+    # Invoke!
+    return {"answer": llm.invoke(prompt).text}
 
 
+# ============= (GRAPH BUILDER) ============== #
 
+# Now that we've all the stuff above (state, tools, nodes), we have to TIE THEM TOGETHER!
 
+def build_agentic_graph():
 
+    # Define a builder object (using our GraphState)
+    builder = StateGraph(GraphState)
 
+    # Register the nodes
+    builder.add_node("agentic_router", agentic_router_node)
+    builder.add_node("rag_node", rag_node)
+
+    # Define the starting node
+    builder.set_entry_point("agentic_router")
+
+    # Define an Edge (how nodes flow to one another)
+    builder.add_edge("agentic_router", "rag_node")
+
+    # Define the terminal (final) node
+    builder.set_finish_point("rag_node")
+
+    # Compile and build!
+    return builder.compile()
+
+# I like to build the Graph as a Singleton. This is what we'll call in the Router
+agentic_graph = build_agentic_graph()
