@@ -7,6 +7,7 @@ from pydantic import SecretStr, BaseModel
 
 from app.models.monster_model import MonsterModel
 from app.services.langchain_service import get_general_chain, get_memory_chain
+from app.services.langgraph_service import agentic_graph
 
 # Every router gets set up like this:
 router = APIRouter(
@@ -182,3 +183,15 @@ memory_chain = get_memory_chain()
 async def chat_with_memory(chat:ChatInputModel):
     # One liner just like the general chain chat
     return memory_chain.invoke(input=chat.input)
+
+
+# One last route for LangGraph ----------------------------------------------------------
+
+# Nothing particularly new here
+@router.post("/langgraph_rag")
+async def langgraph_rag(chat:ChatInputModel):
+
+    # Import the graph builder
+    graph = agentic_graph
+
+    return graph.invoke({"query":chat.input})
