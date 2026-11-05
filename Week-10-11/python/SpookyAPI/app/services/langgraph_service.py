@@ -1,6 +1,6 @@
 from typing import TypedDict, Annotated, Any
 
-from langchain_core.messages import BaseMessage
+from langchain_core.messages import BaseMessage, SystemMessage
 from langchain_core.tools import tool
 from langchain_ollama import ChatOllama
 from langgraph.graph import add_messages
@@ -87,9 +87,30 @@ llm_with_tools = llm.bind_tools(TOOLS)
 # Based on the user's query, which tool should I call?
 def agentic_router_node(state:GraphState) -> GraphState:
 
-    
+    # Get the user's query from state
+    query = state.get("query")
 
-    pass
+    # Prompt the LLM to decide which tool to use based on the query (AGENCY!)
+    messages = [
+        SystemMessage(content=(
+            """
+            You are an internal decision making assistant for a user-facing AI chatbot.
+            
+            If the user is asking about their fear of monsters, or weapons to fight monsters,  
+            use the "search_tools" tool. 
+            
+            If the user is asking specifically about current events and monster sightings,  
+            use the "search_incidents" tool. 
+            
+            You must always call at least one tool. DO NOT answer the user without tools.
+            Feel free to call multiple tools.  
+            """
+        )),
+        HumanMessage(content=query)
+    ]
+
+
+
 
 
 
