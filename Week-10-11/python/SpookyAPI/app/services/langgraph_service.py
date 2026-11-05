@@ -135,7 +135,7 @@ def rag_node(state:GraphState) -> GraphState:
     docs = state.get("docs")
 
     prompt = f"""Respond to the user's Query based on the provided Search Results.
-                ONLY use the provided search results, or say you don't know.
+                ONLY use the provided search results to answer the user's query.
                 
                 The User's Query: {query}
                 The Search Results: {docs}
